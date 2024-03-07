@@ -1,36 +1,22 @@
 import express from "express";
 import cors from "cors";
-import session from "express-session";
-import config from "./Config/Database.js";
 import dotenv from "dotenv";
-import SequelizeStore from "connect-session-sequelize";
+import MemberRoutes from "./Source/Routes/MemberRoutes.js";
+
 dotenv.config();
 
 const app = express();
 
-const sessionStore = SequelizeStore(session.Store);
-
-const store = new sessionStore({
-  db: config,
-});
-
-app.use(
-  session({
-    secret: process.env.SESS_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: store,
-    cookie: {
-      secure: "auto",
-    },
-  })
-);
+app.use(express.json());
 app.use(
   cors({
     credentials: true,
     origin: "http://localhost:3000",
   })
 );
+
+// route app
+app.use(MemberRoutes);
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server up and running... ${process.env.APP_PORT}`);
