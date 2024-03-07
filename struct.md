@@ -29,3 +29,4 @@ depedencies yang di butuhkan
 npm install express mysql2 sequelize swagger-ui-express express-session dotenv
 npm install connect-session-sequelize
 npm install cors
+npm install swagger-ui-express swagger-jsdoc

@@ -3,9 +3,16 @@ import cors from "cors";
 import dotenv from "dotenv";
 import MemberRoutes from "./Source/Routes/MemberRoutes.js";
 
+import specs from "./Source/swagger.js";
+import swaggerUi from "swagger-ui-express";
 dotenv.config();
 
 const app = express();
+// declared swagger docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+app.get("/api/docs", (req, res) => {
+  res.redirect("/api-docs");
+});
 
 app.use(express.json());
 app.use(
