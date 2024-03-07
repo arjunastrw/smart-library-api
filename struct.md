@@ -30,3 +30,5 @@ npm install express mysql2 sequelize swagger-ui-express express-session dotenv
 npm install connect-session-sequelize
 npm install cors
 npm install swagger-ui-express swagger-jsdoc
+npm install --save-dev jest
+npm install --save-dev jest supertest @babel/preset-env @babel/preset-typescript
