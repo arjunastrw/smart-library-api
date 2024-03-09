@@ -56,7 +56,7 @@ export const createBooks = async (req, res) => {
 // function Update Stock Books
 export const updateStockBooks = async (req, res) => {
   try {
-    const book = await Book.findOne({
+    const book = await Books.findOne({
       where: {
         code: req.params.code,
       },
@@ -66,7 +66,7 @@ export const updateStockBooks = async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    book.stock = req.body.stock;
+    book.stock = req.body.stock || book.stock;
     await book.save();
 
     return res

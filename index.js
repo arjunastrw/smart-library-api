@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import MemberRoutes from "./Source/Routes/MemberRoutes.js";
 import BookRoutes from "./Source/Routes/BooksRoutes.js";
+import LoanRoutes from "./Source/Routes/LoanRoutes.js";
 
 import specs from "./Source/swagger.js";
 import swaggerUi from "swagger-ui-express";
@@ -26,6 +27,7 @@ app.use(
 // route app
 app.use(MemberRoutes);
 app.use(BookRoutes);
+app.use(LoanRoutes);
 
 app.listen(process.env.APP_PORT, () => {
   console.log(`Server up and running... ${process.env.APP_PORT}`);
