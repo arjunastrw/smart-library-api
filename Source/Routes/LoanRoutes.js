@@ -41,6 +41,36 @@ router.get("/api/loans", getAllLoan);
  */
 router.get("/api/loan/:id", getLoanByID);
 
+/**
+ * @swagger
+ * /api/loan:
+ *  post:
+ *    description: Membuat data pinjaman buku baru
+ *    tags:
+ *      - Loans
+ *    responses:
+ *      '201':
+ *        description: Data pinjaman buku berhasil dibuat
+ */
 router.post("/api/loan", createLoan);
+
+/**
+ * @swagger
+ * /api/loan/{id}:
+ *  put:
+ *    description: Mengupdate data pinjaman buku
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: ID pinjaman buku
+ *        required: true
+ *        schema:
+ *          type: string
+ *    tags:
+ *      - Loans
+ *    responses:
+ *      '200':
+ *        description: Data pinjaman buku berhasil diupdate
+ */
 router.put("/api/loan/:id", updateReturnDateAndPenaltyStatus);
 export default router;
