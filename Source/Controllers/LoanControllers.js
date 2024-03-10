@@ -1,4 +1,6 @@
 import Loan from "../Models/LoanModels.js";
+import Member from "../Models/MemberModels.js";
+import sequelize from "sequelize";
 
 // function get All loan
 export const getAllLoan = async (req, res) => {
@@ -49,6 +51,31 @@ export const createLoan = async (req, res) => {
       loanDate: loanDateToUse,
     });
     res.status(201).json({ msg: "Loan Created" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const countBooksBorrowedByMember = async (req, res) => {
+  try {
+    const membersWithBooksCount = await Member.findAll({
+      attributes: ["code", "name"],
+      include: [
+        {
+          model: Loan,
+          attributes: [
+            [
+              sequelize.fn("COUNT", sequelize.col("Loan.id")),
+              "total_books_borrowed",
+            ],
+          ],
+          as: "loan",
+        },
+      ],
+      group: ["Member.code", "Member.name"],
+    });
+
+    res.status(200).json(membersWithBooksCount);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

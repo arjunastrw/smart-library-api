@@ -1,5 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../Config/Database.js";
+import Book from "../Models/BooksModels.js";
+import Member from "../Models/MemberModels.js";
 
 class Loan extends Model {}
 
@@ -40,5 +42,15 @@ Loan.init(
     tableName: "loan",
   }
 );
+
+// Definisikan hubungan antara Loan dengan Member
+Loan.belongsTo(Member, {
+  foreignKey: "memberCode",
+  targetKey: "code",
+  as: "member",
+});
+
+// Definisikan hubungan antara Loan dengan Book
+Loan.belongsTo(Book, { foreignKey: "bookCode", targetKey: "code", as: "book" });
 
 export default Loan;

@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAllLoan,
   getLoanByID,
+  countBooksBorrowedByMember,
   createLoan,
   updateReturnDateAndPenaltyStatus,
 } from "../Controllers/LoanControllers.js";
@@ -40,6 +41,26 @@ router.get("/api/loans", getAllLoan);
  *         description: OK
  */
 router.get("/api/loan/:id", getLoanByID);
+
+/**
+ * @swagger
+ * /api/:code/count:
+ *   get:
+ *     description: Mendapatkan data jumlah buku yang di pinjam anggota
+ *     parameters:
+ *       - name: code
+ *         in: path
+ *         description: Code anggota
+ *         required: true
+ *         schema:
+ *           type: string
+ *     tags:
+ *       - Loans
+ *     responses:
+ *       '200':
+ *         description: OK
+ */
+router.get("/api/:code/count/", countBooksBorrowedByMember);
 
 /**
  * @swagger
