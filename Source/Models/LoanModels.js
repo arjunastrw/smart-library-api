@@ -9,6 +9,7 @@ Loan.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     memberCode: {
       type: DataTypes.STRING,

@@ -17,10 +17,10 @@ export const getLoanByID = async (req, res) => {
   try {
     const id = req.params.id;
     const loan = await Loan.findOne({ where: { id: id } });
-    if (loan) {
+    if (!loan) {
       return res.status(404).json({ msg: "Data Not Found" });
     }
-    res.status(200).json("All Data Loan", loan);
+    res.status(200).json(loan);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
